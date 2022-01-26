@@ -32,14 +32,13 @@ jobs:
           tags: "latest,${{ env.RELEASE_NAME }}"
           
       - name: Publish Nginx image to Registry
-      - name: Log in to DigitalOcean Container Registry with short-lived credentials
-        run: doctl registry login --expiry-seconds 1200
-    
-      # - name: Push image to DigitalOcean Container Registry
-      #   run: docker push ${{ secrets.REGISTRY_NAME }}docker push ${{ secrets.REGISTRY_NAME }}/ezwash-crm-php:latest,${{ env.RELEASE_NAME }}
-
-      #     password: ${{ secrets.DOCKER_PASSWORD }}
-      #     tags: "latest,${{ env.RELEASE_NAME }}"
+        uses: elgohr/Publish-Docker-Github-Action@master
+        with:
+          name: ${{ secrets.REGISTRY_NAME }}/ezwash-crm-nginx
+          dockerfile: .docker/nginx/prod.Dockerfile
+          username: ${{ secrets.DOCKER_USERNAME }}     
+          password: ${{ secrets.DOCKER_PASSWORD }}
+          tags: "latest,${{ env.RELEASE_NAME }}"
       - name: Patch new image on infrastructure
         env:
           RELEASE_VERSION: ${{ env.RELEASE_NAME }}
