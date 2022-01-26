@@ -3,11 +3,6 @@ name: Build Docker Images
 on:
   push:
     branches:
-      - master
-        paths:
-      - 'config/**'
-      - 'Dockerfile'
-      - '.github/workflows/**'
 
 jobs:
   build:
