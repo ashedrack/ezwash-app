@@ -23,8 +23,12 @@ jobs:
           token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
       - name: Log in to DO Container Registry 
         run: doctl registry login --expiry-seconds 600
+
+      - name: Build Image
+        run: docker build -t ezwash-crm-php -f .docker/php/prod.Dockerfile .
+
       - name: Tag image 
-        run: docker tag registry.digitalocean.com/inits/ezwash-crm-php:${{env.RELEASE_NAME }}
+        run: docker tag ezwash-crm-php:${{env.RELEASE_NAME }} registry.digitalocean.com/inits/${{env.RELEASE_NAME }}
       
       - name: Push image to DO Container Registry
         run: docker push registry.digitalocean.com/inits/ezwash-crm-php:${{env.RELEASE_NAME }}
