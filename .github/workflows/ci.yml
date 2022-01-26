@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - master
-          
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -15,43 +15,22 @@ jobs:
       - name: Get release version
         id: get_version
         run: echo ::set-env name=RELEASE_NAME::$(echo ${GITHUB_SHA:0:7})
-
-          # Install doctl.  
-      - name: Install doctl
-        uses: digitalocean/action-doctl@v2
+      - name: Publish PHP image to Registry
+        uses: elgohr/Publish-Docker-Github-Action@master
         with:
-          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
-      - name: Log in to DO Container Registry 
-        run: doctl registry login --expiry-seconds 600
-
-      - name: Build Image
-        run: docker build -t ezwash-crm-php -f .docker/php/prod.Dockerfile .
-
-      # - name: Push image 
-        # run: docker tag ezwash-crm-php registry.digitalocean.com/inits/${{ env.RELEASE_NAME }}
-        
-        run: docker tag ezwash-crm-php registry.digitalocean.com/inits/ezwash-crm-php
-             
-      - name: Push image to DO Container Registry
-        run: docker push registry.digitalocean.com/inits/ezwash-crm-php
-
-      # - name: Publish PHP image to Registry
-      #   uses: elgohr/Publish-Docker-Github-Action@master   
-      #   with:
-      #     name: ${{ secrets.REGISTRY_NAME }}/ezwash-crm-php
-      #     dockerfile: .docker/php/prod.Dockerfile
-      #     username: ${{ secrets.DOCKER_USERNAME }}
-      #     password: ${{ secrets.DOCKER_PASSWORD }}
-      #     tags: "latest,${{ env.RELEASE_NAME }}"
-                    
-      # - name: Publish Nginx image to Registry
-      #   uses: elgohr/Publish-Docker-Github-Action@master
-      #   with:
-      #     name: ${{ secrets.REGISTRY_NAME }}/ezwash-crm-nginx
-      #     dockerfile: .docker/nginx/prod.Dockerfile
-      #     username: ${{ secrets.DOCKER_USERNAME }}     
-      #     password: ${{ secrets.DOCKER_PASSWORD }}
-      #     tags: "latest,${{ env.RELEASE_NAME }}"
+          name: docker.io/ashedrack/ezwash-crm-php
+          dockerfile: .docker/php/prod.Dockerfile
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+          tags: "latest,${{ env.RELEASE_NAME }}"
+      - name: Publish Nginx image to Registry
+        uses: elgohr/Publish-Docker-Github-Action@master
+        with:
+          name: docker.io/ashedrack/ezwash-crm-nginx
+          dockerfile: .docker/nginx/prod.Dockerfile
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+          tags: "latest,${{ env.RELEASE_NAME }}"
       - name: Patch new image on infrastructure
         env:
           RELEASE_VERSION: ${{ env.RELEASE_NAME }}
@@ -82,8 +61,8 @@ jobs:
           # Create a new branch for the release
           git checkout -b release-${RELEASE_VERSION}
           # Patch the new version using kustomize
-          kustomize edit set image laravel-app-php=docker.io/ashedrack/dockerlaravelphp:${RELEASE_VERSION}
-          kustomize edit set image laravel-app-nginx=docker.io/ashedrack/dockerlaravelnginx:${RELEASE_VERSION}
+          kustomize edit set image laravel-app-php=docker.io/ashedrack/ezwash-crm-php:${RELEASE_VERSION}
+          kustomize edit set image laravel-app-nginx=docker.io/ashedrack/ezwash-crm-nginx:${RELEASE_VERSION}
           # Add the changes to the infrastructure repository
           if [[ `git status --porcelain` ]]; then
             hub config --global user.name "${GITHUB_NAME}"
