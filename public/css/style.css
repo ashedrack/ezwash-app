@@ -1,0 +1,421 @@
+/*================================================================================
+	Item Name: Ezwash CRM V2 Styles
+	Version: 1.0
+	Author: Victoria Etim( INITS LIMITED)
+	Author URL: http://initsng.com
+================================================================================ */
+
+/* General Layout Styles  */
+.header-navbar{
+	height: 5rem !important;
+}
+.header-navbar .navbar-header .navbar-brand .brand-logo {
+    width: 100px;
+}
+
+.header-navbar .navbar-header .navbar-brand {
+    padding: 8px 0;
+}
+
+.navbar-container .search-input.open {
+	width: fit-content;
+}
+
+#main-menu-navigation{
+	margin: auto;
+}
+#main-menu-navigation {
+	margin: auto;
+}
+
+@media (min-width: 1200px){
+	.container {
+		max-width: 1500px !important;
+	}
+
+	.navbar-container .search-input.open .input {
+		width: 300px;
+	}
+}
+
+@media (min-width: 979px) {
+  ul.nav li.dropdown:hover > ul.dropdown-menu {
+    display: block;
+  }
+}
+
+.pad-right-5px{
+	padding-right: 5px !important;
+}
+
+.pad-left-5px{
+	padding-left: 5px !important;
+}
+
+
+.stats-box-primary {
+    border-left: 5px solid #05a5e5;
+    cursor: default;
+}
+
+.stats-box-danger {
+    border-left: 5px solid #ec1822;
+    cursor: default;
+}
+
+.stats-box.border-left-5{
+    border-left-width: 5px;
+    cursor: pointer;
+}
+
+.stats-box.border-top-5{
+    border-top-width: 5px;
+    cursor: pointer;
+}
+
+.stats-box h3{
+    font-size: 24px;
+    /*font-weight: bold;*/
+    font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Times New Roman", Times, serif;
+}
+.ball-spin-fade-loader>div {
+	background-color: #ec1823
+}
+.preloader{
+    width: 100%;
+    height: 100vh;
+    top: 0;
+    position: absolute;
+    z-index: 1000;
+    background: rgba(33, 38, 42, 0.9);
+}
+.md-content{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 220px;
+    transform: translate(-50%, -50%) !important;
+    z-index: 1000;
+    color: #333;
+    background: #ffffff;
+    border-radius: 3px;
+    margin: 0 auto;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, .2);
+}
+
+.md-content #spinner-holder{
+    padding: 15px 15px 30px;
+    margin: 0;
+    font-weight: 300;
+    font-size: 1.15em;
+}
+.loader-wrapper {
+    height: 1em;
+}
+.loader-danger div {
+     background-color:  #ec1823;
+     width: 10px;
+     height: 10px;
+}
+
+#popup-notice{
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    position: fixed;
+    top: 70px;
+    right: 10px;
+    width: 440px;
+    box-shadow: 0 0 1em -0.5em #000, -0.5em 1em 5em -1em rgba(0,0,0,0.8);
+    background: #fff;
+    /* border: solid 1px #03a5e2; */
+    z-index: 1000;
+    border-left: 10px solid;
+    padding: 10px;
+}
+html body .pace .pace-progress {
+	background-color: #04a8e1;
+}
+
+.app-content.center-layout {
+  overflow: hidden;
+  min-height: calc(100vh - 240px) !important;
+}
+.action-button {
+    width: 100px;
+}
+.page-title-row {
+    padding: 10px 20px;
+}
+/* ----------- End General Layout Styles ----------- */
+
+/*Login Layout Custom Styles*/
+html body.bg-full-screen-image {
+    background: url(../images/bg-01.jpg) no-repeat center center fixed;
+    background-size: cover;
+}
+.app-content.center-layout.auth_wrapper {
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+/* ----------- End Login Layout Custom Styles -----------*/
+
+/* Location List Styles */
+
+#all_locations{
+    margin: auto;
+    background: none;
+    transition: all 0.2s ease-out;
+    line-height: 16px;
+}
+
+.blur-bg {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.blur-bg .btn-outline-white {
+    height: fit-content;
+    margin: auto;
+}
+.blur-bg .btn-outline-white:hover{
+	background-color: rgba(255, 255, 255, 0.23);
+}
+.profile-card-with-cover-content .card-title a{
+	color: #333;
+}
+
+#image-preview-div {
+	height: 400px;
+	width: 100%;
+	border-radius: 5px;
+	border: 1px solid #cacfe7;
+	margin-bottom: 1em;
+	display: flex;
+	align-items: center;
+}
+
+#image-preview-div img {
+	height: 100%;
+	margin: auto;
+}
+.delete-location-form {
+	display: inline-block;
+}
+
+.profile-image-circle {
+	margin: 1em auto;
+	height: 250px;
+	width: 250px;
+	background-size: cover;
+	background-position: center;
+	border-radius: 50%;
+}
+
+.profile-image-wrapper{
+	text-align: center;
+	height: 340px;
+}
+
+td.naira-prefix, td span.naira-prefix {
+	text-align: right
+}
+
+.naira-prefix::before {
+	content: "₦"
+}
+
+.neg-naira-prefix::before {
+    content: "– ₦"
+}
+
+.radio-inline input {
+	margin-right: 5px;
+}
+
+.offer-cards .definition-list {
+    margin: auto;
+    text-align: center;
+    font-size: larger;
+}
+.offer-cards {
+	box-shadow: 0 1px 15px 1px rgba(62, 57, 107, 0.07);
+}
+
+.offer-cards > .card {
+    background-color: inherit;
+    box-shadow: none;
+}
+.offer-cards .stats-section {
+    width: 100%;
+    display: flex !important;
+    align-items: center !important;
+}
+.offer-cards .stats-section > .row{
+	width: 100%;
+	margin: 0;
+}
+.offer-details {
+	background: #fff;
+	display: flex !important;
+	align-items: center;
+}
+.offer-details > .row{
+	width: 100%;
+	margin: 0;
+}
+
+td.action-column {
+	display: inline-flex
+}
+
+.stat-title, .stat-value{
+	color: #333
+}
+
+.stat-value {
+	line-height: 48px;
+	font-size: 30px;
+}
+
+.data-loading .md-modal{
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 99;
+    /* visibility: hidden; */
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    backface-visibility: hidden;
+    background: rgba(34, 34, 34, 0.44);
+
+}
+
+.data-loading .spinner-holder {
+    padding: 15px 15px 30px;
+    margin: 0;
+    font-weight: 300;
+    font-size: 1.15em;
+
+}
+.employee-profile-description, .profile-description{
+    font-weight: 500;
+    letter-spacing: 0.05rem;
+    font-size: 1.12rem;
+    margin-bottom: 1rem !important;
+}
+h2.profile-description{
+    font-weight: 600;
+    letter-spacing: 0.05rem;
+    font-size: 1.2rem;
+    margin-bottom: 1rem !important;
+}
+.location-mod-btn {
+	padding: 0;
+}
+.location-mod-btn > button,.location-mod-btn a {
+	width: 100%;
+	padding-left: 0;
+	padding-right: 0;
+}
+
+
+tr.heading-row {
+	background: #04a5e5;
+    color: #fff;
+}
+
+tr.heading-row td {
+	border: 0;
+	font-weight: bold
+}
+.autocomplete-items div {
+    padding: 10px;
+    cursor: pointer;
+    background-color: #fff;
+    border-bottom: 1px solid #d4d4d4;
+}
+.autocomplete-items div:hover {
+    /*when hovering an item:*/
+    background-color: #e9e9e9;
+}
+.autocomplete-active {
+    /*when navigating through the items using the arrow keys:*/
+    background-color: DodgerBlue !important;
+    color: #ffffff;
+}
+
+/* ---------- End Autocomplete Dropdown Styles ----------- */
+
+.filter-form{
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.employee-manage-btns {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.employee-manage-btns .btn {
+  width: 100px;
+}
+
+.page-heading {
+	font-weight: 500;
+    letter-spacing: 0.05rem;
+    font-size: 1.5rem;
+    margin: 7px;
+}
+
+#sitewide-search-result.show{
+	display: flex !important;
+}
+
+.show-section {
+    display: block !important;
+}
+
+.hide-section {
+    display: none !important;
+}
+.locker-row {
+	padding: 0 2rem
+}
+.locker-box {
+	height: 30px;
+	margin: 2px;
+	color: #6b6f82;
+	padding-top: 5px;
+	border-radius: 0.25rem;
+	border: 1px solid #6b6f82;
+	cursor: pointer;
+}
+
+.locker-box.occupied {
+	color: #fff;
+	cursor:default;
+	background-color: #e7171e;
+	border: 1px solid #e7171e;
+}
+.locker-box.selected {
+	color: #fff;
+	background-color: #6b6f82;
+}
+
+footer {
+	height: 70px;
+	display: flex;
+}
+
+footer > p {
+	margin: auto;
+}
+

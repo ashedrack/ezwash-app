@@ -1,0 +1,65 @@
+/* Select Dropdown menu styles */
+.services-dropdown {
+    text-align: center;
+    margin-bottom: 14px;
+    padding-right: 0;
+    position: absolute;
+    right: 1.5em;
+    clear: both;
+}
+@media (min-width: 1200px){
+    .services-dropdown  {
+        float: right;
+        text-align: right;
+    }
+}
+.multiselect-container {
+    max-height: 220px;
+    overflow-y: scroll;
+}
+
+.dropdown-menu {
+    border: 1px solid rgba(120,130,140,.13);
+    border-radius: 0;
+    box-shadow: 0 3px 12px rgba(0,0,0,.05)!important;
+    -webkit-box-shadow: none !important;
+    -moz-box-shadow: none !important;
+    padding-bottom: 8px;
+    margin-top: 0;
+}
+.multiselect-container>li>a>label{
+    padding: 5px !important;
+    width: 100%;
+    margin: auto;
+    color: #474955;
+}
+
+.multiselect-container>li>a>label:hover{
+    background-color: #7acae2;
+    color: #fff;
+}
+.multiselect-container>li.active label{
+    background-color: #01a9e0;
+    color: #fff !important;
+}
+
+.multiselect-container>li>a>label input[type=checkbox]{
+    opacity: 0;
+}
+.multiselect-filter .input-group-addon,.multiselect-filter .input-group-btn{
+    display: none;
+}
+.multiselect-search {
+    margin-right: 10px;
+}
+.multiselect.dropdown-toggle.btn {
+    border-color: #05a5e5 !important;
+    background-color: #05a5e5 !important;
+    color: #FFFFFF;
+    min-width: 150px;
+}
+
+select.payment_methods {
+    height: calc(1.5rem + 2px) !important;
+    text-transform: uppercase;
+}

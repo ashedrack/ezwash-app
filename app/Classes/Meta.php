@@ -1,0 +1,32 @@
+<?php
+
+namespace App\Classes;
+
+class Meta
+{
+    const SELF_SERVICE_ORDER_TYPE = 1;
+    const DROP_OFF_ORDER_TYPE = 2;
+
+    const CARD_PAYMENT = 1;
+    const CASH_PAYMENT = 2;
+    const POS_PAYMENT = 3;
+
+    const ORDER_STATUS_PENDING = 1;
+    const ORDER_STATUS_COMPLETED = 2;
+
+    const UNUSED_DISCOUNT = 1;
+    const DISCOUNT_APPLIED_TO_ORDER = 2;
+    const USED_DISCOUNT = 3;
+    const EXPIRED_DISCOUNT = 4;
+
+    const IS_HOME_ADDRESS = 1;
+    const NOT_HOME_ADDRESS = 0;
+    const PICKUP_ORDER_REQUEST_TYPE = 1;
+    const DELIVERY_ORDER_REQUEST_TYPE = 2;
+    const PICKUP_CANCELED_STATUS = 2;
+    const DELIVERY_CANCELED_STATUS = 9;
+    const DELIVERED_ORDER_REQUEST_STATUS = 12;
+    const PICKEDUP_ORDER_REQUEST_STATUS = 4;
+    const PICKUP_REQUESTED_ORDER_REQUEST_STATUS = 1;
+    const DELIVERY_REQUESTED_ORDER_REQUEST_STATUS = 8;
+}
