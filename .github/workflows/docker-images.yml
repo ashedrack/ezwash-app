@@ -47,10 +47,10 @@ jobs:
       run: docker push ${{ secrets.REGISTRY_NAME }}/ezwash-crm-nginx
         tags: "latest,${{ env.RELEASE_NAME }}"
 
-      - name: Push image to DigitalOcean Container Registry
+    - name: Push image to DigitalOcean Container Registry
         run: docker push ${{ secrets.REGISTRY_NAME }}/ezwash-crm-nginx
 
-      - name: Patch new image on infrastructure
+    - name: Patch new image on infrastructure
         env:
           RELEASE_VERSION: ${{ env.RELEASE_NAME }}
           GIT_EMAIL: ${{ secrets.GIT_EMAIL }}
