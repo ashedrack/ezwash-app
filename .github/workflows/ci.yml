@@ -28,10 +28,10 @@ jobs:
         run: docker build -t ezwash-crm-php${{ env.RELEASE_NAME }} -f .docker/php/prod.Dockerfile .
 
       - name: Tag image 
-        run: docker tag ezwash-crm-php registry.digitalocean.com/inits/${{ env.RELEASE_NAME }}
+        # run: docker tag ezwash-crm-php registry.digitalocean.com/inits/${{ env.RELEASE_NAME }}
         
-        # run: docker tag sample/my-page \
-        #      registry.digitalocean.com/my-sample-registry/my-sample-page:${{github.event.inputs.version }}
+        run: docker tag ezwash-crm-php:${{ env.RELEASE_NAME }}
+             registry.digitalocean.com/inits/ezwash-crm-php:${{ env.RELEASE_NAME }}
       - name: Push image to DO Container Registry
         run: docker push registry.digitalocean.com/inits/ezwash-crm-php:${{env.RELEASE_NAME }}
 
