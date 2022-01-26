@@ -15,6 +15,7 @@ jobs:
       - name: Get release version
         id: get_version
         run: echo ::set-env name=RELEASE_NAME::$(echo ${GITHUB_SHA:0:7})
+
       - name: Publish PHP image to Registry
         uses: elgohr/Publish-Docker-Github-Action@master
         with:
@@ -23,10 +24,11 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
           tags: "latest,${{ env.RELEASE_NAME }}"
+
       - name: Publish Nginx image to Registry
         uses: elgohr/Publish-Docker-Github-Action@master
         with:
-          name: registry.digitalocean.com/inits/ezwash-crm-php
+          name: registry.digitalocean.com/inits/ezwash-crm-nginx
           dockerfile: .docker/nginx/prod.Dockerfile
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
@@ -62,7 +64,8 @@ jobs:
           git checkout -b release-${RELEASE_VERSION}
           # Patch the new version using kustomize
           kustomize edit set image laravel-app-php=registry.digitalocean.com/inits/ezwash-crm-php:${RELEASE_VERSION}
-          kustomize edit set image laravel-app-nginx=registry.digitalocean.com/inits/ezwash-crm-php:${RELEASE_VERSION}
+          kustomize edit set image laravel-app-nginx=registry.digitalocean.com/inits/ezwash-crm-nginx:${RELEASE_VERSION}
+          
           # Add the changes to the infrastructure repository
           if [[ `git status --porcelain` ]]; then
             hub config --global user.name "${GITHUB_NAME}"
@@ -70,6 +73,7 @@ jobs:
             # Adds the kustomization file to git stage
             hub add kustomization.yml
             hub commit -F- <<EOF
+            
           Auto-release of the image version
           This commit updates the application container image version to: ${RELEASE_VERSION}
           EOF
