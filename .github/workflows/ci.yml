@@ -23,10 +23,12 @@ jobs:
           token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
 
       - name: Publish PHP image to Registry
-          # Build a Docker image of your application in your registry and tag the image with the $GITHUB_SHA.
-      - name: Build container image
-        run: docker build -t ${{ secrets.REGISTRY_NAME }}/ezwash-crm-php -f .docker/php/prod.Dockerfile .
-
+        uses: elgohr/Publish-Docker-Github-Action@master   
+        with:
+          name: ${{ secrets.REGISTRY_NAME }}/ezwash-crm-php
+          dockerfile: .docker/php/prod.Dockerfile
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
           tags: "latest,${{ env.RELEASE_NAME }}"
       - name: Publish Nginx image to Registry
         uses: elgohr/Publish-Docker-Github-Action@master
