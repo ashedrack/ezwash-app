@@ -21,24 +21,31 @@ jobs:
         uses: digitalocean/action-doctl@v2
         with:
           token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+      - name: Log in to DO Container Registry 
+        run: doctl registry login --expiry-seconds 600
+      - name: Tag image 
+        run: docker tag registry.digitalocean.com/inits/ezwash-crm-php:${{env.RELEASE_NAME }}
+      
+      - name: Push image to DO Container Registry
+        run: docker push registry.digitalocean.com/inits/ezwash-crm-php:${{env.RELEASE_NAME }}
 
-      - name: Publish PHP image to Registry
-        uses: elgohr/Publish-Docker-Github-Action@master   
-        with:
-          name: ${{ secrets.REGISTRY_NAME }}/ezwash-crm-php
-          dockerfile: .docker/php/prod.Dockerfile
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
-          tags: "latest,${{ env.RELEASE_NAME }}"
+      # - name: Publish PHP image to Registry
+      #   uses: elgohr/Publish-Docker-Github-Action@master   
+      #   with:
+      #     name: ${{ secrets.REGISTRY_NAME }}/ezwash-crm-php
+      #     dockerfile: .docker/php/prod.Dockerfile
+      #     username: ${{ secrets.DOCKER_USERNAME }}
+      #     password: ${{ secrets.DOCKER_PASSWORD }}
+      #     tags: "latest,${{ env.RELEASE_NAME }}"
                     
-      - name: Publish Nginx image to Registry
-        uses: elgohr/Publish-Docker-Github-Action@master
-        with:
-          name: ${{ secrets.REGISTRY_NAME }}/ezwash-crm-nginx
-          dockerfile: .docker/nginx/prod.Dockerfile
-          username: ${{ secrets.DOCKER_USERNAME }}     
-          password: ${{ secrets.DOCKER_PASSWORD }}
-          tags: "latest,${{ env.RELEASE_NAME }}"
+      # - name: Publish Nginx image to Registry
+      #   uses: elgohr/Publish-Docker-Github-Action@master
+      #   with:
+      #     name: ${{ secrets.REGISTRY_NAME }}/ezwash-crm-nginx
+      #     dockerfile: .docker/nginx/prod.Dockerfile
+      #     username: ${{ secrets.DOCKER_USERNAME }}     
+      #     password: ${{ secrets.DOCKER_PASSWORD }}
+      #     tags: "latest,${{ env.RELEASE_NAME }}"
       - name: Patch new image on infrastructure
         env:
           RELEASE_VERSION: ${{ env.RELEASE_NAME }}
