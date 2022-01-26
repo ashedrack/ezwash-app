@@ -27,7 +27,7 @@ jobs:
         with:
           name: ${{ secrets.REGISTRY_NAME }}/ezwash-crm-php
           dockerfile: .docker/php/prod.Dockerfile
-          # username: ${{ secrets.DOCKER_USERNAME }}
+          username: ${{ secrets.DOCKER_USERNAME }}
           # password: ${{ secrets.DOCKER_PASSWORD }}
           tags: "latest,${{ env.RELEASE_NAME }}"
       - name: Publish Nginx image to Registry
@@ -35,7 +35,7 @@ jobs:
         with:
           name: ${{ secrets.REGISTRY_NAME }}/ezwash-crm-nginx
           dockerfile: .docker/nginx/prod.Dockerfile
-          # username: ${{ secrets.DOCKER_USERNAME }}
+          username: ${{ secrets.DOCKER_USERNAME }}
           # password: ${{ secrets.DOCKER_PASSWORD }}
           tags: "latest,${{ env.RELEASE_NAME }}"
       - name: Patch new image on infrastructure
