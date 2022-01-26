@@ -9,16 +9,16 @@ RUN mkdir -p /var/www/html/database/{factories,seeds} \
   && composer install --no-dev --prefer-dist --no-scripts --no-autoloader --no-progress --ignore-platform-reqs
 
 # NPM dependencies.
-FROM node:12 AS npm-build
+# FROM node:12 AS npm-build
 
-WORKDIR /var/www/html
+# WORKDIR /var/www/html
 
-COPY package.json package-lock.json webpack.mix.js /var/www/html/
-COPY resources /var/www/html/resources/
-COPY public /var/www/html/public/
+# COPY package.json package-lock.json webpack.mix.js /var/www/html/
+# COPY resources /var/www/html/resources/
+# COPY public /var/www/html/public/
 
-RUN npm ci
-RUN npm run production
+# RUN npm ci
+# RUN npm run production
 
 # Actual production image.
 FROM php:7.4-fpm
