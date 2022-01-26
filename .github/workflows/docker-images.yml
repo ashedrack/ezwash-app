@@ -37,7 +37,7 @@ jobs:
     - name: Log in to DigitalOcean Container Registry with short-lived credentials
       run: doctl registry login --expiry-seconds 1200
 
-    # Push Php Image to the registry
+    # Push Php Image
     - name: Push image to DigitalOcean Container Registry
       run: docker push ${{ secrets.REGISTRY_NAME }}/ezwash-crm-php
         tags: "latest,${{ env.RELEASE_NAME }}"
@@ -47,10 +47,10 @@ jobs:
       run: docker push ${{ secrets.REGISTRY_NAME }}/ezwash-crm-nginx
         tags: "latest,${{ env.RELEASE_NAME }}"
 
-    - name: Push image to DigitalOcean Container Registry
+      - name: Push image to DigitalOcean Container Registry
         run: docker push ${{ secrets.REGISTRY_NAME }}/ezwash-crm-nginx
 
-    - name: Patch new image on infrastructure
+      - name: Patch new image on infrastructure
         env:
           RELEASE_VERSION: ${{ env.RELEASE_NAME }}
           GIT_EMAIL: ${{ secrets.GIT_EMAIL }}
