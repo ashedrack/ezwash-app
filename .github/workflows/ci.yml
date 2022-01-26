@@ -23,7 +23,7 @@ jobs:
           token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
 
       - name: Publish PHP image to Registry
-        uses: elgohr/Publish-Docker-Github-Action@master
+        uses: elgohr/Publish-Docker-Github-Action@master   
         with:
           name: ${{ secrets.REGISTRY_NAME }}/ezwash-crm-php
           dockerfile: .docker/php/prod.Dockerfile
