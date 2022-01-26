@@ -4,35 +4,52 @@ on:
   push:
     branches:
       - master
+        paths:
+      - 'config/**'
+      - 'Dockerfile'
+      - '.github/workflows/**'
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
-      - name: Get release version
-        id: get_version
-      - name: ACTIONS_ALLOW_UNSECURE_COMMANDS
-        run: echo 'ACTIONS_ALLOW_UNSECURE_COMMANDS=true' >> $GITHUB_ENV
-        run: echo ::set-env name=RELEASE_NAME::$(echo ${GITHUB_SHA:0:7})
-        
-      - name: Publish PHP image to Registry
-        uses: elgohr/Publish-Docker-Github-Action@master
-        with:
-          name: registry.digitalocean.com/inits/ezwash-crm-php
-          dockerfile: .docker/php/prod.Dockerfile
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
-          tags: "latest,${{ env.RELEASE_NAME }}"
+    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it.
+    - name: Checkout master
+    - uses: actions/checkout@v1
+    - name: Get release version
+      id: get_version
+      run: echo ::set-env name=RELEASE_NAME::$(echo ${GITHUB_SHA:0:7})
 
-      - name: Publish Nginx image to Registry
-        uses: elgohr/Publish-Docker-Github-Action@master
-        with:
-          name: registry.digitalocean.com/inits/ezwash-crm-nginx
-          dockerfile: .docker/nginx/prod.Dockerfile
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
-          tags: "latest,${{ env.RELEASE_NAME }}"
+    # Install doctl.
+    - name: Install doctl
+      uses: digitalocean/action-doctl@v2
+      with:
+        token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+
+    # Build a Docker image of your application in your registry and tag the image with the $GITHUB_SHA.
+    - name: Build container image
+      run: docker build -t ${{ secrets.REGISTRY_NAME }}/ezwash-crm-php -f .docker/php/prod.Dockerfile .
+
+    # Build a Docker image of your application in your registry and tag the image with the $GITHUB_SHA.
+    - name: Build container image
+      run: docker build -t ${{ secrets.REGISTRY_NAME }}/ezwash-crm-nginx -f .docker/nginx/prod.Dockerfile .
+
+    - name: Log in to DigitalOcean Container Registry with short-lived credentials
+      run: doctl registry login --expiry-seconds 1200
+
+    # Push Php Image to the registry
+    - name: Push image to DigitalOcean Container Registry
+      run: docker push ${{ secrets.REGISTRY_NAME }}/ezwash-crm-php
+        tags: "latest,${{ env.RELEASE_NAME }}"
+
+    # Push Nginx Image to the registry
+    - name: Push image to DigitalOcean Container Registry
+      run: docker push ${{ secrets.REGISTRY_NAME }}/ezwash-crm-nginx
+        tags: "latest,${{ env.RELEASE_NAME }}"
+
+      - name: Push image to DigitalOcean Container Registry
+        run: docker push ${{ secrets.REGISTRY_NAME }}/ezwash-crm-nginx
+
       - name: Patch new image on infrastructure
         env:
           RELEASE_VERSION: ${{ env.RELEASE_NAME }}
