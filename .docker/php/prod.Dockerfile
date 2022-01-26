@@ -1,7 +1,7 @@
 # Composer dependencies.
 FROM composer AS composer-build
 
-WORKDIR /var/www/html
+WORKDIR /var/www/html/
 
 COPY composer.json composer.lock /var/www/html/
 
