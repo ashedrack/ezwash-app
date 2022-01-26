@@ -3,7 +3,7 @@ FROM composer AS composer-build
 
 WORKDIR /var/www/html
 
-# COPY composer.json composer.lock /var/www/html/
+COPY composer.json composer.json /var/www/html/
 
 RUN mkdir -p /var/www/html/database/{factories,seeds} \
   && composer install --no-dev --prefer-dist --no-scripts --no-autoloader --no-progress --ignore-platform-reqs
