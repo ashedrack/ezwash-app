@@ -16,7 +16,7 @@ RUN groupadd --gid 501 appuser \
   && useradd --uid 501 -g appuser \
      -G www-data,root --shell /bin/bash \
      --create-home appuser
-
+  
 USER appuser
 
 
