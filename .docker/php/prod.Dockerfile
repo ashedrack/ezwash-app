@@ -46,5 +46,5 @@ COPY --chown=www-data --from=composer-build /var/www/html/vendor/ /var/www/html/
 COPY --chown=www-data . /var/www/html
 
 RUN composer dump -o 
-RUN composer check-platform-reqs 
+# RUN composer check-platform-reqs 
 RUN rm -f /usr/bin/composer
