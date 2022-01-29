@@ -6,6 +6,8 @@ services:
       context: .
     volumes:
       - ./:/var/www/html
+    environment:
+      APP_DEBUG: "true"
 
   web:
     image: nginx:1.17
