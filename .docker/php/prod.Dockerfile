@@ -21,7 +21,7 @@ RUN mkdir -p /var/www/html/database/{factories,seeds} \
 # RUN npm run production
 
 # Actual production image.
-FROM php:7.4-fpm
+FROM php:7.2-fpm
 
 WORKDIR /var/www/html
 
